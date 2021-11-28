@@ -1,0 +1,28 @@
+server:
+  port: ${ANDROID_TS_SERVICE_PORT:8080}
+  error:
+    include-stacktrace: always
+
+spring:
+  liquibase:
+    url: jdbc:postgresql://${POSTGRES_URL:localhost:5432/postgres}
+    user: ${POSTGRES_USERNAME:postgres}
+    password: ${POSTGRES_PASSWORD:123456}
+    change-log: classpath:/db.changelog-master.xml
+    enabled: ${LIQUIBASE_ENABLED:true}
+  datasource:
+    url: jdbc:postgresql://${POSTGRES_URL:localhost:5432/postgres}
+    username: ${POSTGRES_USERNAME:postgres}
+    password: ${POSTGRES_PASSWORD:123456}
+  jpa:
+    database: postgresql
+    hibernate:
+      ddl-auto: update
+    generate-ddl: false
+    show-sql: false
+
+
+map:
+  coordinate:
+    x: 53.912588204153835
+    y: 27.59467898476897

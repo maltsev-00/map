@@ -1,3 +1,141 @@
+
+
+create table item_ingredient
+(
+    id bigint not null
+        primary key
+);
+
+alter table item_ingredient
+    owner to postgres;
+
+create table item_description
+(
+    id                 bigint           not null
+        primary key,
+    path_image         varchar(255),
+    price              double precision not null,
+    weight             double precision not null,
+    item_ingredient_id bigint
+        constraint fkfgaj9xi4o1vwep84m5bc52c52
+            references item_ingredient
+);
+
+alter table item_description
+    owner to postgres;
+
+create table currency
+(
+    id                  bigint not null
+        primary key,
+    name                varchar(255),
+    item_description_id bigint
+        constraint fkqfp7n8gsqn6f15e41t2h4gidf
+            references item_description
+);
+
+alter table currency
+    owner to postgres;
+
+create table ingredient
+(
+    id            bigint not null
+        primary key,
+    name          varchar(255),
+    ingredient_id bigint
+        constraint fkswn5b9gr6rgo7jnr84p870wtl
+            references item_description
+);
+
+alter table ingredient
+    owner to postgres;
+
+create table role
+(
+    id   bigserial
+        primary key,
+    name varchar(255)
+);
+
+alter table role
+    owner to postgres;
+
+create table type_place
+(
+    id   bigint not null
+        primary key,
+    name varchar(255)
+);
+
+alter table type_place
+    owner to postgres;
+
+create table place
+(
+    id            bigint not null
+        primary key,
+    address       varchar(255),
+    favorite      boolean,
+    height        double precision,
+    name          varchar(255),
+    raiting       real   not null,
+    width         double precision,
+    type_place_id bigint
+        constraint fks9jxnngmo9yrdkepl784c9v30
+            references type_place
+);
+
+alter table place
+    owner to postgres;
+
+create table menu_item
+(
+    id                  bigint not null
+        primary key,
+    name                varchar(255),
+    item_description_id bigint
+        constraint fk4m2oei4jvg1xgy947at9537or
+            references item_description,
+    place_id            bigint
+        constraint fkefcldcdv9ynxre9sgo2yjm2gi
+            references place
+);
+
+alter table menu_item
+    owner to postgres;
+
+create table users
+(
+    id         bigint not null
+        primary key,
+    email      varchar(255)
+        constraint uk6dotkott2kjsp8vw4d0m25fb7
+            unique,
+    first_name varchar(255),
+    last_name  varchar(255),
+    password   varchar(255)
+);
+
+alter table users
+    owner to postgres;
+
+create table users_roles
+(
+    user_id bigint not null
+        constraint fk2o0jvgh89lemvvo17cbqvdxaa
+            references users,
+    role_id bigint not null
+        constraint fkt4v0rrweyk393bdgt107vdx0x
+            references role
+);
+
+alter table users_roles
+    owner to postgres;
+
+
+
+
+
 INSERT INTO type_place (id, name)
 VALUES (1, 'Повседневные заведения'),
        (2, 'Семейного типа'),

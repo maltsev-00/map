@@ -63,7 +63,8 @@
                             <small th:text="${place.raiting}"></small>
                         </div>
                         <p class="mb-1" th:text="${place.address}"></p>
-                        <small th:text="${place.typePlace.name}"></small>
+                        <small th:text="${place.typePlace.name}"></small><br>
+                        <a th:href="'/menu/'+${place.id}">Меню</a>
                         <br>
                         <div class="like">
 

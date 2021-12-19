@@ -8,9 +8,7 @@ public class UserRegistrationDto {
 
     private String lastName;
 
-
     private String password;
-
 
     private String confirmPassword;
 

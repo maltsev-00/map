@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -23,6 +24,12 @@ public class MenuItemServiceImpl implements MenuItemService {
         List<Place> places = new ArrayList<>();
         menuItems.forEach(menuItem -> places.add(menuItem.getPlace()));
         return places;
+    }
+
+    @Override
+    public List<MenuItem> getMenuByName(String name) {
+       return menuItemRepository.findMenuById(Long.valueOf(name));
+
     }
 
     private List<MenuItem> getListPlaceByNameIngredient(String name) {

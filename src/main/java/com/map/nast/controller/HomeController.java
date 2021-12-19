@@ -1,6 +1,7 @@
 package com.map.nast.controller;
 
 import com.map.nast.model.dto.PlaceForm;
+import com.map.nast.service.MenuItemService;
 import com.map.nast.service.PlaceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class HomeController {
 
     private final PlaceService placeService;
+    private final MenuItemService menuItemService;
 
     @GetMapping("/login")
     public String login(Model model) {
@@ -24,6 +26,12 @@ public class HomeController {
     public String getAllRestaurant(Model model, PlaceForm placeForm) {
         model.addAttribute("places", placeService.getPlaceList());
         return "home";
+    }
+
+    @GetMapping("/menu/{name}")
+    public String getMenu(Model model, @PathVariable("name") String name) {
+        model.addAttribute("menu", menuItemService.getMenuByName(name));
+        return "menu";
     }
 
     @PostMapping("/find")

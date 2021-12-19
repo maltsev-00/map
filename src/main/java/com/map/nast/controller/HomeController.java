@@ -15,6 +15,11 @@ public class HomeController {
 
     private final PlaceService placeService;
 
+    @GetMapping("/login")
+    public String login(Model model) {
+        return "login";
+    }
+
     @GetMapping
     public String getAllRestaurant(Model model, PlaceForm placeForm) {
         model.addAttribute("places", placeService.getPlaceList());
